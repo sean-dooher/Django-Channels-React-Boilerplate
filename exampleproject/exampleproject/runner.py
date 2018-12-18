@@ -27,7 +27,7 @@ class PytestTestRunner:
         if self.keepdb:
             argv.append('--reuse-db')
         if os.getenv("TEST_REPORT"):
-            argv.append("--cov=hub")
+            argv.append("--cov=backend_app")
             argv.append("--cov-report=xml:reports/coverage.xml")
             argv.append("--junitxml=reports/junit.xml")
 

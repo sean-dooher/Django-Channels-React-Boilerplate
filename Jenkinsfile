@@ -12,7 +12,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'mkdir reports && chmod 777 reports'
-        sh 'docker-compose -p $ID run -v $WORKSPACE/reports:/sentinel/reports interfaceserver ./run_tests.sh || true'
+        sh 'docker-compose -p $ID run -v $WORKSPACE/reports:/exampleproject/reports interfaceserver ./run_tests.sh || true'
         junit 'reports/junit.xml'
         cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'reports/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
       }
@@ -22,8 +22,8 @@ pipeline {
         branch 'master'
       }
       steps {
-        sh 'docker tag seandooher/sentinel-iot:$ID seandooher/sentinel-iot:latest'
-        sh 'docker push seandooher/sentinel-iot:latest'
+        sh 'docker tag examplerepo/exampleproject:$ID examplerepo/exampleproject:latest'
+        sh 'docker push examplerepo/exampleproject:latest'
       }
     }
   }
